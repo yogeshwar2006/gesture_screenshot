@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AI Hand Gesture Screenshot</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
+
+body{
+height:100vh;
+background:black;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+color:white;
+}
+
+.container{
+text-align:center;
+z-index:2;
+}
+
+h1{
+margin-bottom:30px;
+font-size:35px;
+}
+
+button{
+padding:14px 35px;
+margin:10px;
+font-size:18px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+.start{
+background:#00ff88;
+}
+
+.stop{
+background:#ff4444;
+color:white;
+}
+
+img{
+margin-top:20px;
+border-radius:10px;
+border:3px solid white;
+}
+
+/* bubble background */
+
+.bubbles{
+position:absolute;
+width:100%;
+height:100%;
+top:0;
+left:0;
+overflow:hidden;
+}
+
+.bubbles span{
+position:absolute;
+border-radius:50%;
+animation:move 15s linear infinite;
+}
+
+.bubbles span:nth-child(1){width:40px;height:40px;background:#ff0080;left:10%;}
+.bubbles span:nth-child(2){width:30px;height:30px;background:#00ffff;left:25%;}
+.bubbles span:nth-child(3){width:50px;height:50px;background:#00ff88;left:40%;}
+.bubbles span:nth-child(4){width:25px;height:25px;background:#ffaa00;left:55%;}
+.bubbles span:nth-child(5){width:45px;height:45px;background:#aa00ff;left:70%;}
+.bubbles span:nth-child(6){width:35px;height:35px;background:#00aaff;left:85%;}
+
+@keyframes move{
+
+0%{
+transform:translate(-200px,100vh);
+opacity:0.7;
+}
+
+100%{
+transform:translate(200px,-120vh);
+opacity:0;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>AI Hand Gesture Screenshot</h1>
+
+<button class="start" onclick="startCamera()">Start Camera</button>
+<button class="stop" onclick="stopCamera()">Stop Camera</button>
+
+<br>
+
+<img id="videoFeed" width="640">
+
+</div>
+
+<div class="bubbles">
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+</div>
+
+<script>
+
+function startCamera(){
+
+document.getElementById("videoFeed").src="/video_feed";
+
+}
+
+function stopCamera(){
+
+fetch('/stop');
+
+document.getElementById("videoFeed").src="";
+
+}
+
+</script>
+
+</body>
+</html>
